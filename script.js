@@ -1,4 +1,4 @@
-// script.js — Fotoğraf tıklanınca iltifat + konfeti
+// script.js — Ezgi'ye tıklanınca iltifat + konfeti
 
 const ILTIFATLAR = [
   'Çok hoşsun! 💕',
@@ -16,6 +16,7 @@ const ILTIFATLAR = [
   'Gülüşün dünyayı aydınlatıyor! ☀️',
   'Çok özelsin! 🦋',
   'Muhteşemsin! 👑',
+  'Gözlerine hayranım! 👑'
 ];
 
 const photo = document.getElementById('photo');
