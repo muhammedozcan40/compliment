@@ -12,11 +12,13 @@ const ILTIFATLAR = [
   'İnanılmaz güzelsin! 😍',
   'Kalbin kadar güzelsin! 💗',
   'Her şeyin çok güzel! 🌸',
-  'Seni çok seviyorum! ❤️',
+  'Dünyanın en zeki ergoterapisti ❤️',
   'Gülüşün dünyayı aydınlatıyor! ☀️',
   'Çok özelsin! 🦋',
   'Muhteşemsin! 👑',
-  'Gözlerine hayranım! 👑'
+  'Gözlerine hayranım! 👑',
+  'İşyerinde en güzel olmak nasıl bir duygu? 👑',
+  'Hayat seninle daha güzel hissettiriyor 👑'
 ];
 
 const photo = document.getElementById('photo');
