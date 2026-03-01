@@ -1,10 +1,19 @@
-# Sen Çok Özelsin 💕
+# Ezgi'nin Günlük İltifat Alma Sitesi 💕
 
 Ortadaki fotoğrafa tıklayınca iltifat mesajları ve konfeti çıkan tek sayfalık web sitesi.
 
+## Projeyi arkadaşına gönder (GitHub)
+
+Proje GitHub’da. Arkadaşın şu linklerden erişebilir:
+
+- **Repo (kod):** https://github.com/muhammedozcan40/compliment  
+- **Canlı site (GitHub Pages açıksa):** https://muhammedozcan40.github.io/compliment/
+
+Arkadaşın sadece canlı site linkine tıklayıp sayfayı kullanabilir. Kodu incelemek veya indirmek için repo linkini paylaş.
+
 ## Nasıl kullanılır?
 
-1. **Kendi fotoğrafını koy:** Proje klasörüne `photo.jpg` adında bir fotoğraf ekle (veya `index.html` içinde `src="photo.jpg"` kısmını kendi dosya adına çevir).
+1. **Kendi fotoğrafını koy:** Proje klasörüne `photo.png` ekle (veya `index.html` içinde `src` kısmını kendi dosya adına çevir).
 2. **Yerel olarak aç:** `index.html` dosyasına çift tıkla veya tarayıcıda aç.
 
 ## GitHub ile herkese aç (GitHub Pages)
@@ -35,4 +44,4 @@ Site GitHub URL’i ile yayınlanacak: **`https://KULLANICI_ADIN.github.io/REPO_
 - `index.html` — Ana sayfa
 - `styles.css` — Stiller
 - `script.js` — Tıklama, iltifatlar, konfeti
-- `photo.jpg` — Ortada görünecek fotoğraf (sen ekleyeceksin)
+- `photo.png` — Ortada görünecek fotoğraf
