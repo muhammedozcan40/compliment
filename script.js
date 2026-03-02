@@ -9,6 +9,7 @@ const ILTIFATLAR = [
   'Çok hoşuma gidiyorsun! 💖',
   'Harikasın! 🎉',
   'Eşsizsin! 💫',
+  'Nasıl oldun kendini toparlayabildin mi? 👑',
   'İnanılmaz güzelsin! 😍',
   'Kalbin kadar güzelsin! 💗',
   'Her şeyin çok güzel! 🌸',
