@@ -1,4 +1,4 @@
-// script.js — Ezgi'ye tıklanınca iltifat + konfeti
+// script.js — İltifat + Fotoğraf eşleştirme (tab menü, eşleşmede ortadaki resim + konfeti)
 
 const ILTIFATLAR = [
   'Çok hoşsun! 💕',
@@ -22,8 +22,12 @@ const ILTIFATLAR = [
   'Nasıl oldun kendini toparlayabildin mi? 👑'
 ];
 
+const CARD_IMAGES = ['card1.png', 'card2.png', 'card3.png', 'card4.png'];
+
 const photo = document.getElementById('photo');
 const complimentEl = document.getElementById('compliment');
+const cardsGrid = document.getElementById('cards-grid');
+const matchModal = document.getElementById('match-modal');
 
 function rastgeleIltifat() {
   return ILTIFATLAR[Math.floor(Math.random() * ILTIFATLAR.length)];
@@ -63,6 +67,96 @@ function iltifatGoster() {
   setTimeout(() => {
     complimentEl.classList.add('hidden');
   }, 2500);
+}
+
+// ——— Tab geçişi ———
+document.querySelectorAll('.tab').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach((b) => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId + '-section').classList.add('active');
+    if (tabId === 'matching' && !window.matchingGameInitialized) {
+      initMatchingGame();
+      window.matchingGameInitialized = true;
+    }
+  });
+});
+
+// ——— Fotoğraf eşleştirme oyunu ———
+let flippedCards = [];
+let lockBoard = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function createCard(pairId, imageSrc) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.pairId = pairId;
+  card.innerHTML = `
+    <div class="card-face card-back">🃏</div>
+    <div class="card-face card-front"><img src="${imageSrc}" alt="Kart" /></div>
+  `;
+  card.addEventListener('click', () => flipCard(card));
+  return card;
+}
+
+function flipCard(card) {
+  if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  card.classList.add('flipped');
+  flippedCards.push(card);
+  if (flippedCards.length === 2) {
+    lockBoard = true;
+    const [a, b] = flippedCards;
+    if (a.dataset.pairId === b.dataset.pairId) {
+      a.classList.add('matched');
+      b.classList.add('matched');
+      flippedCards = [];
+      lockBoard = false;
+      showMatchCelebration();
+    } else {
+      setTimeout(() => {
+        a.classList.remove('flipped');
+        b.classList.remove('flipped');
+        flippedCards = [];
+        lockBoard = false;
+      }, 700);
+    }
+  }
+}
+
+function showMatchCelebration() {
+  matchModal.classList.remove('hidden');
+  konfetiPatlat();
+  setTimeout(() => {
+    matchModal.classList.add('hidden');
+    if (document.querySelectorAll('.card.matched').length === 8) {
+      setTimeout(() => {
+        konfetiPatlat();
+        alert('Tebrikler! Tüm eşleşmeleri buldun! 🎉');
+      }, 300);
+    }
+  }, 1800);
+}
+
+function initMatchingGame() {
+  cardsGrid.innerHTML = '';
+  const pairs = [...CARD_IMAGES, ...CARD_IMAGES].map((src, i) => ({
+    pairId: Math.floor(i / 2),
+    src
+  }));
+  const shuffled = shuffle(pairs);
+  shuffled.forEach(({ pairId, src }) => {
+    cardsGrid.appendChild(createCard(pairId, src));
+  });
 }
 
 photo.addEventListener('click', iltifatGoster);

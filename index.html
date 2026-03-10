@@ -9,20 +9,48 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">Ezgi'ye tıkla ✨</h1>
-    <div class="photo-wrapper">
-      <img
-        id="photo"
-        src="photo.png"
-        alt="Özel fotoğraf"
-        title="Tıkla!"
-        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22320%22 viewBox=%220 0 320 320%22%3E%3Crect fill=%22%23ffb6c1%22 width=%22320%22 height=%22320%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%231a1a2e%22 font-size=%2224%22 font-family=%22sans-serif%22%3EFotoğrafını buraya koy (photo.png)%3C/text%3E%3C/svg%3E';"
-      />
-      <div id="compliment" class="compliment hidden"></div>
+  <nav class="tabs">
+    <button type="button" class="tab active" data-tab="compliment">İltifat 💕</button>
+    <button type="button" class="tab" data-tab="matching">Fotoğraf Eşleştirme 🖼️</button>
+  </nav>
+
+  <main class="main">
+    <!-- İltifat bölümü -->
+    <section id="compliment-section" class="tab-panel active">
+      <div class="container">
+        <h1 class="title">Ezgi'ye tıkla ✨</h1>
+        <div class="photo-wrapper">
+          <img
+            id="photo"
+            src="photo.png"
+            alt="Özel fotoğraf"
+            title="Tıkla!"
+            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22320%22 viewBox=%220 0 320 320%22%3E%3Crect fill=%22%23ffb6c1%22 width=%22320%22 height=%22320%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%231a1a2e%22 font-size=%2224%22 font-family=%22sans-serif%22%3EFotoğrafını buraya koy (photo.png)%3C/text%3E%3C/svg%3E';"
+          />
+          <div id="compliment" class="compliment hidden"></div>
+        </div>
+        <p class="hint">Tamamen motivasyon amaçlı yapılmıştır. Lütfen ciddiye almayınız. Bu sadece moral amaçlı ben böyle düşünmüyorum.</p>
+      </div>
+    </section>
+
+    <!-- Fotoğraf eşleştirme bölümü -->
+    <section id="matching-section" class="tab-panel">
+      <div class="game-container">
+        <h2 class="game-title">Eşleştirmeyi bul 🎴</h2>
+        <p class="game-hint">İki aynı fotoğrafı eşleştir — her eşleşmede sürpriz!</p>
+        <div id="cards-grid" class="cards-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Eşleşme anında ortadaki resim + konfeti -->
+  <div id="match-modal" class="match-modal hidden">
+    <div class="match-modal-content">
+      <img src="photo.png" alt="Eşleşme!" class="match-photo" />
+      <p class="match-text">Eşleşme! ✨</p>
     </div>
-    <p class="hint">Tamamen motivasyon amaçlı yapılmıştır. Lütfen ciddiye almayınız. Bu sadece moral amaçlı ben böyle düşünmüyorum.</p>
   </div>
+
   <canvas id="confetti-canvas"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
