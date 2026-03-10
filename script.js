@@ -125,11 +125,9 @@ function flipCard(card) {
     const sameImage = first.getAttribute('data-match') === second.getAttribute('data-match');
     const isMatch = !sameElement && sameImage;
     if (isMatch) {
-      first.classList.add('matched');
-      second.classList.add('matched');
       flippedCards = [];
       lockBoard = false;
-      showMatchCelebration();
+      showMatchCelebration(first, second);
     } else {
       setTimeout(() => {
         first.classList.remove('flipped');
@@ -156,11 +154,13 @@ function goToComplimentTab() {
   window.matchingGameInitialized = false;
 }
 
-function showMatchCelebration() {
+function showMatchCelebration(card1, card2) {
   matchModal.classList.remove('hidden');
-  const remaining = updateMatchCounter();
   setTimeout(() => konfetiPatlat(), 1000);
   setTimeout(() => {
+    card1.classList.add('matched');
+    card2.classList.add('matched');
+    const remaining = updateMatchCounter();
     matchModal.classList.add('hidden');
     if (remaining === 0) {
       setTimeout(() => {
