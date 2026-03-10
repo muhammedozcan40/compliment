@@ -98,15 +98,18 @@ function shuffle(arr) {
   return a;
 }
 
-function createCard(pairId, imageSrc) {
+function createCard(imageSrc) {
   const card = document.createElement('div');
   card.className = 'card';
-  card.dataset.pairId = pairId;
+  card.setAttribute('data-match', imageSrc);
   card.innerHTML = `
     <div class="card-face card-back">🃏</div>
     <div class="card-face card-front"><img src="${imageSrc}" alt="Kart" /></div>
   `;
-  card.addEventListener('click', () => flipCard(card));
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    flipCard(card);
+  });
   return card;
 }
 
@@ -116,17 +119,21 @@ function flipCard(card) {
   flippedCards.push(card);
   if (flippedCards.length === 2) {
     lockBoard = true;
-    const [a, b] = flippedCards;
-    if (a.dataset.pairId === b.dataset.pairId) {
-      a.classList.add('matched');
-      b.classList.add('matched');
+    const first = flippedCards[0];
+    const second = flippedCards[1];
+    const sameElement = first === second;
+    const sameImage = first.getAttribute('data-match') === second.getAttribute('data-match');
+    const isMatch = !sameElement && sameImage;
+    if (isMatch) {
+      first.classList.add('matched');
+      second.classList.add('matched');
       flippedCards = [];
       lockBoard = false;
       showMatchCelebration();
     } else {
       setTimeout(() => {
-        a.classList.remove('flipped');
-        b.classList.remove('flipped');
+        first.classList.remove('flipped');
+        second.classList.remove('flipped');
         flippedCards = [];
         lockBoard = false;
       }, 700);
@@ -151,8 +158,8 @@ function goToComplimentTab() {
 
 function showMatchCelebration() {
   matchModal.classList.remove('hidden');
-  konfetiPatlat();
   const remaining = updateMatchCounter();
+  setTimeout(() => konfetiPatlat(), 1000);
   setTimeout(() => {
     matchModal.classList.add('hidden');
     if (remaining === 0) {
@@ -167,13 +174,9 @@ function showMatchCelebration() {
 function initMatchingGame() {
   cardsGrid.innerHTML = '';
   if (matchCountEl) matchCountEl.textContent = '8';
-  const pairs = [...CARD_IMAGES, ...CARD_IMAGES].map((src, i) => ({
-    pairId: Math.floor(i / 2),
-    src
-  }));
-  const shuffled = shuffle(pairs);
-  shuffled.forEach(({ pairId, src }) => {
-    cardsGrid.appendChild(createCard(pairId, src));
+  const deck = shuffle([...CARD_IMAGES, ...CARD_IMAGES]);
+  deck.forEach((imageSrc) => {
+    cardsGrid.appendChild(createCard(imageSrc));
   });
 }
 

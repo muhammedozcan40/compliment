@@ -212,7 +212,8 @@ body {
   transform: rotateY(180deg);
 }
 .card.matched {
-  display: none;
+  display: none !important;
+  visibility: hidden !important;
 }
 .card-face {
   position: absolute;
