@@ -28,6 +28,7 @@ const photo = document.getElementById('photo');
 const complimentEl = document.getElementById('compliment');
 const cardsGrid = document.getElementById('cards-grid');
 const matchModal = document.getElementById('match-modal');
+const matchCountEl = document.getElementById('match-count');
 
 function rastgeleIltifat() {
   return ILTIFATLAR[Math.floor(Math.random() * ILTIFATLAR.length)];
@@ -133,22 +134,39 @@ function flipCard(card) {
   }
 }
 
+function updateMatchCounter() {
+  const matched = document.querySelectorAll('.card.matched').length;
+  const remaining = 8 - matched;
+  if (matchCountEl) matchCountEl.textContent = remaining;
+  return remaining;
+}
+
+function goToComplimentTab() {
+  document.querySelectorAll('.tab').forEach((b) => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
+  document.querySelector('.tab[data-tab="compliment"]').classList.add('active');
+  document.getElementById('compliment-section').classList.add('active');
+  window.matchingGameInitialized = false;
+}
+
 function showMatchCelebration() {
   matchModal.classList.remove('hidden');
   konfetiPatlat();
+  const remaining = updateMatchCounter();
   setTimeout(() => {
     matchModal.classList.add('hidden');
-    if (document.querySelectorAll('.card.matched').length === 8) {
+    if (remaining === 0) {
       setTimeout(() => {
         konfetiPatlat();
-        alert('Tebrikler! Tüm eşleşmeleri buldun! 🎉');
-      }, 300);
+        goToComplimentTab();
+      }, 400);
     }
   }, 1800);
 }
 
 function initMatchingGame() {
   cardsGrid.innerHTML = '';
+  if (matchCountEl) matchCountEl.textContent = '8';
   const pairs = [...CARD_IMAGES, ...CARD_IMAGES].map((src, i) => ({
     pairId: Math.floor(i / 2),
     src

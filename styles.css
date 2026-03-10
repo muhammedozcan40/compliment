@@ -185,7 +185,13 @@ body {
 .game-hint {
   font-size: 0.9rem;
   opacity: 0.85;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.match-counter {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffb6c1;
 }
 .cards-grid {
   display: grid;
