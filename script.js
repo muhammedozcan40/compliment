@@ -1,9 +1,24 @@
 // script.js — Ezgi'ye tıklanınca iltifat + konfeti
 
 const ILTIFATLAR = [
-  'Nasıl oldun kendini toparlayabildin mi? 👑',
-  'Nasıl oldun kendini toparlayabildin mi? 👑',
-  'Nasıl oldun kendini toparlayabildin mi? 👑',
+  'Çok hoşsun! 💕',
+  'Çok güzelsin! ✨',
+  'Gözlerin çok güzel! 👀',
+  'Mükemmelsin! 🌟',
+  'Çok tatlısın! 🍬',
+  'Çok hoşuma gidiyorsun! 💖',
+  'Harikasın! 🎉',
+  'Eşsizsin! 💫',
+  'İnanılmaz güzelsin! 😍',
+  'Kalbin kadar güzelsin! 💗',
+  'Her şeyin çok güzel! 🌸',
+  'Dünyanın en zeki ergoterapisti ❤️',
+  'Gülüşün dünyayı aydınlatıyor! ☀️',
+  'Çok özelsin! 🦋',
+  'Muhteşemsin! 👑',
+  'Gözlerine hayranım! 👑',
+  'İşyerinde en güzel olmak nasıl bir duygu? 👑',
+  'Hayat seninle daha güzel hissettiriyor 👑',
   'Nasıl oldun kendini toparlayabildin mi? 👑'
 ];
 
